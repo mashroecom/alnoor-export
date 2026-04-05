@@ -3,7 +3,21 @@
     "allow": [
       "WebFetch(domain:github.com)",
       "Bash(uv --version)",
-      "Bash(find \"d:\\\\Alnoor/src/components\" -name \"*.tsx\" -exec basename {} \\\\;)"
+      "Bash(find \"d:\\\\Alnoor/src/components\" -name \"*.tsx\" -exec basename {} \\\\;)",
+      "Bash(curl -s -H \"Authorization: Bearer zQwIrdGTTkbdEBnvjNDXDQIPtfhMeXwV8Ib3Fdonc4aa357b\" \"https://developers.hostinger.com/api/hosting/v1/websites\")",
+      "Read(//c/Users/hmo29/**)"
     ]
+  },
+  "servers": {
+    "hostinger-mcp": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "hostinger-api-mcp@latest"
+      ],
+      "env": {
+        "API_TOKEN": "qum2tOsD2WCM3QQue1PNW7TbD1z1egzmTDAEF3Ch9ae1cb33"
+      }
+    }
   }
 }

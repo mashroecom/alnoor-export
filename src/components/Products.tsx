@@ -34,7 +34,7 @@ export default function Products() {
       dir={t.dir}
     >
       <div className="max-w-7xl mx-auto px-5 sm:px-8">
-        <div className={`flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-12 reveal-scale ${isAr ? "sm:flex-row-reverse" : ""}`}>
+        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-12 reveal-scale">
           <div className={`max-w-xl ${isAr ? "text-right" : ""}`}>
             <span className="inline-block text-primary text-sm font-semibold tracking-widest uppercase mb-3">
               {t.products.badge}
