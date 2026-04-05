@@ -46,9 +46,100 @@ body {
   outline-offset: 2px;
 }
 
-/* Hero */
+/* ── Aurora hero gradient ────────────────────────────────── */
+@property --aurora-a {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 160deg;
+}
+@property --aurora-s1 {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 0%;
+}
+@property --aurora-s2 {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 40%;
+}
+@property --aurora-c1 {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: #1a4d1b;
+}
+@property --aurora-c2 {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: #2d6a2e;
+}
+@property --aurora-c3 {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: #3a7d3b;
+}
+
 .hero-gradient {
-  background: linear-gradient(160deg, #1a4d1b 0%, #2d6a2e 40%, #3a7d3b 100%);
+  --aurora-a: 160deg;
+  --aurora-s1: 0%;
+  --aurora-s2: 40%;
+  --aurora-c1: #1a4d1b;
+  --aurora-c2: #2d6a2e;
+  --aurora-c3: #3a7d3b;
+  background: linear-gradient(var(--aurora-a), var(--aurora-c1) var(--aurora-s1), var(--aurora-c2) var(--aurora-s2), var(--aurora-c3) 100%);
+  animation: auroraShift 8s cubic-bezier(0.45, 0, 0.55, 1) infinite alternate;
+}
+
+@keyframes auroraShift {
+  0% {
+    --aurora-a: 160deg;
+    --aurora-c1: #1a4d1b;
+    --aurora-c2: #2d6a2e;
+    --aurora-c3: #3a7d3b;
+    --aurora-s1: 0%;
+    --aurora-s2: 40%;
+  }
+  33% {
+    --aurora-a: 175deg;
+    --aurora-c1: #1b5220;
+    --aurora-c2: #358036;
+    --aurora-c3: #2a6b2d;
+    --aurora-s1: 5%;
+    --aurora-s2: 50%;
+  }
+  66% {
+    --aurora-a: 150deg;
+    --aurora-c1: #174518;
+    --aurora-c2: #2d6a2e;
+    --aurora-c3: #448744;
+    --aurora-s1: 0%;
+    --aurora-s2: 35%;
+  }
+  100% {
+    --aurora-a: 170deg;
+    --aurora-c1: #1e5a20;
+    --aurora-c2: #307432;
+    --aurora-c3: #357a38;
+    --aurora-s1: 3%;
+    --aurora-s2: 45%;
+  }
+}
+
+/* Aurora shimmer overlay */
+.hero-gradient::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 40%, rgba(74,158,76,0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 80% 60%, rgba(58,125,59,0.10) 0%, transparent 50%);
+  animation: shimmerDrift 12s cubic-bezier(0.45, 0, 0.55, 1) infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes shimmerDrift {
+  0%   { opacity: 0.6; transform: translateX(0) scale(1); }
+  50%  { opacity: 1;   transform: translateX(3%) scale(1.03); }
+  100% { opacity: 0.7; transform: translateX(-2%) scale(0.98); }
 }
 
 /* Fade in up — expo ease out, no bounce */
@@ -61,7 +152,7 @@ body {
   animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-/* Scroll reveal */
+/* ── Scroll reveal (base — intersection observer fallback) ── */
 .reveal {
   opacity: 0;
   transform: translateY(24px);
@@ -73,6 +164,123 @@ body {
   transform: translateY(0);
 }
 
+/* ── Cinematic scroll-driven reveals ───────────────────── */
+/* Slide from left */
+.reveal-slide-left {
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal-slide-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Slide from right */
+.reveal-slide-right {
+  opacity: 0;
+  transform: translateX(40px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal-slide-right.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Scale reveal — zoom in from slightly smaller */
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.92);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal-scale.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Clip reveal — wipes in from bottom */
+.reveal-clip {
+  clip-path: inset(100% 0 0 0);
+  transition: clip-path 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal-clip.visible {
+  clip-path: inset(0 0 0 0);
+}
+
+/* Stagger children — apply to parent, children get cascading delays */
+.stagger-children.visible > * {
+  animation: staggerFadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.stagger-children > * {
+  opacity: 0;
+}
+.stagger-children.visible > *:nth-child(1) { animation-delay: 0s; }
+.stagger-children.visible > *:nth-child(2) { animation-delay: 0.08s; }
+.stagger-children.visible > *:nth-child(3) { animation-delay: 0.16s; }
+.stagger-children.visible > *:nth-child(4) { animation-delay: 0.24s; }
+.stagger-children.visible > *:nth-child(5) { animation-delay: 0.32s; }
+
+@keyframes staggerFadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Scroll-driven parallax (CSS only, progressive) ───── */
+@supports (animation-timeline: scroll()) {
+  .scroll-parallax-slow {
+    animation: parallaxSlow linear both;
+    animation-timeline: scroll();
+    animation-range: entry 0% exit 100%;
+  }
+
+  @keyframes parallaxSlow {
+    from { transform: translateY(40px); }
+    to { transform: translateY(-40px); }
+  }
+
+  .scroll-parallax-fast {
+    animation: parallaxFast linear both;
+    animation-timeline: scroll();
+    animation-range: entry 0% exit 100%;
+  }
+
+  @keyframes parallaxFast {
+    from { transform: translateY(60px); }
+    to { transform: translateY(-60px); }
+  }
+
+  /* Section divider lines that grow on scroll */
+  .scroll-line-grow {
+    animation: lineGrow linear both;
+    animation-timeline: view();
+    animation-range: entry 20% cover 50%;
+  }
+
+  @keyframes lineGrow {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+}
+
+/* ── Hero parallax image grid ──────────────────────────── */
+.hero-img-float {
+  animation: heroImgFloat 6s cubic-bezier(0.45, 0, 0.55, 1) infinite alternate;
+}
+.hero-img-float-delay {
+  animation: heroImgFloat 7s cubic-bezier(0.45, 0, 0.55, 1) infinite alternate;
+  animation-delay: -2s;
+}
+.hero-img-float-slow {
+  animation: heroImgFloat 8s cubic-bezier(0.45, 0, 0.55, 1) infinite alternate;
+  animation-delay: -4s;
+}
+
+@keyframes heroImgFloat {
+  0%   { transform: translateY(0) rotate(0deg); }
+  50%  { transform: translateY(-8px) rotate(0.5deg); }
+  100% { transform: translateY(4px) rotate(-0.3deg); }
+}
+
 /* Product card */
 .product-card {
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
@@ -81,6 +289,22 @@ body {
 .product-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 14px 36px rgba(26, 45, 26, 0.12);
+}
+
+/* Product grid — staggered entrance on filter change */
+.product-enter {
+  animation: productEnter 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes productEnter {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 /* WhatsApp pulse */
@@ -94,6 +318,123 @@ body {
   animation: pulse-green 2.5s infinite;
 }
 
+/* Floating scroll arrow */
+@keyframes floatY {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(6px); }
+}
+
+.animate-float-y {
+  animation: floatY 2.4s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+/* Modal backdrop */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.95) translateY(12px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* FAB entrance */
+@keyframes fabIn {
+  from { opacity: 0; transform: scale(0.6); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.animate-fab-in {
+  animation: fabIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Mobile menu slide */
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-slide-down {
+  animation: slideDown 0.25s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Product grid fade */
+@keyframes fadeScale {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.animate-fade-scale {
+  animation: fadeScale 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Button press feedback */
+.btn-press:active {
+  transform: scale(0.97);
+}
+
+/* ── Section divider lines ─────────────────────────────── */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, var(--color-border) 20%, var(--color-primary) 50%, var(--color-border) 80%, transparent 100%);
+  transform-origin: left;
+  opacity: 0.5;
+}
+
+/* ── Enhanced modal backdrop ───────────────────────────── */
+.modal-backdrop {
+  animation: modalBgIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+  backdrop-filter: blur(4px);
+}
+
+@keyframes modalBgIn {
+  from { opacity: 0; backdrop-filter: blur(0); }
+  to { opacity: 1; backdrop-filter: blur(4px); }
+}
+
+.modal-content {
+  animation: modalContentIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes modalContentIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* ── Glow on CTA buttons ──────────────────────────────── */
+.btn-glow {
+  position: relative;
+}
+.btn-glow::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(212,148,14,0.3), rgba(74,158,76,0.3));
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.3s ease;
+  filter: blur(12px);
+}
+.btn-glow:hover::after {
+  opacity: 1;
+}
+
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
@@ -102,5 +443,11 @@ body {
     transition-duration: 0.01ms !important;
   }
   html { scroll-behavior: auto; }
-  .reveal { opacity: 1; transform: none; }
+  .reveal, .reveal-slide-left, .reveal-slide-right, .reveal-scale, .reveal-clip {
+    opacity: 1;
+    transform: none;
+    clip-path: none;
+  }
+  .stagger-children > * { opacity: 1; }
+  .hero-gradient::before { animation: none; opacity: 0.7; }
 }

@@ -11,6 +11,7 @@ export default function Products() {
   const isAr = lang === "ar";
   const [activeCategory, setActiveCategory] = useState("all");
   const [selectedProduct, setSelectedProduct] = useState<typeof products[0] | null>(null);
+  const [filterKey, setFilterKey] = useState(0);
   const sectionRef = useRevealOnScroll();
 
   const filtered =
@@ -33,7 +34,7 @@ export default function Products() {
       dir={t.dir}
     >
       <div className="max-w-7xl mx-auto px-5 sm:px-8">
-        <div className={`flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-12 reveal ${isAr ? "sm:flex-row-reverse" : ""}`}>
+        <div className={`flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-12 reveal-scale ${isAr ? "sm:flex-row-reverse" : ""}`}>
           <div className={`max-w-xl ${isAr ? "text-right" : ""}`}>
             <span className="inline-block text-primary text-sm font-semibold tracking-widest uppercase mb-3">
               {t.products.badge}
@@ -51,7 +52,7 @@ export default function Products() {
                 key={cat.key}
                 role="tab"
                 aria-selected={activeCategory === cat.key}
-                onClick={() => setActiveCategory(cat.key)}
+                onClick={() => { setActiveCategory(cat.key); setFilterKey((k) => k + 1); }}
                 className={`px-5 py-2 min-h-[44px] flex items-center rounded-full text-sm font-semibold transition-all duration-200 ${
                   activeCategory === cat.key
                     ? "bg-primary text-white"
@@ -64,12 +65,13 @@ export default function Products() {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-5" role="tabpanel">
-          {filtered.map((product) => (
+        <div key={filterKey} className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-5" role="tabpanel">
+          {filtered.map((product, i) => (
             <button
               key={product.id}
               onClick={() => setSelectedProduct(product)}
-              className="product-card bg-white rounded-2xl border border-border overflow-hidden group text-left cursor-pointer"
+              className="product-card product-enter bg-white rounded-2xl border border-border overflow-hidden group text-left cursor-pointer"
+              style={{ animationDelay: `${Math.min(i * 0.04, 0.4)}s` }}
             >
               <div className="aspect-square bg-surface-alt relative overflow-hidden">
                 <Image
@@ -108,14 +110,14 @@ export default function Products() {
       {/* Product Detail Modal */}
       {selectedProduct && (
         <div
-          className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/50"
+          className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/50 modal-backdrop"
           onClick={() => setSelectedProduct(null)}
           role="dialog"
           aria-modal="true"
           aria-label={selectedProduct.name[lang]}
         >
           <div
-            className={`bg-white rounded-2xl max-w-lg w-full overflow-hidden shadow-2xl ${isAr ? "font-ar" : ""}`}
+            className={`bg-white rounded-2xl max-w-lg w-full overflow-hidden shadow-2xl modal-content ${isAr ? "font-ar" : ""}`}
             onClick={(e) => e.stopPropagation()}
             dir={t.dir}
           >

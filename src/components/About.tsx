@@ -1,7 +1,47 @@
 "use client";
 
+import { useEffect, useRef, useState, useCallback } from "react";
 import { useLang } from "@/lib/LanguageContext";
 import { useRevealOnScroll } from "@/hooks/useRevealOnScroll";
+
+function CountUpValue({ value, duration = 1200 }: { value: string; duration?: number }) {
+  const numMatch = value.match(/\d+/);
+  const target = numMatch ? parseInt(numMatch[0], 10) : 0;
+  const prefix = value.slice(0, value.indexOf(String(target)));
+  const suffix = value.slice(value.indexOf(String(target)) + String(target).length);
+
+  const [current, setCurrent] = useState(0);
+  const ref = useRef<HTMLSpanElement>(null);
+  const started = useRef(false);
+
+  const animate = useCallback(() => {
+    if (started.current) return;
+    started.current = true;
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReduced) { setCurrent(target); return; }
+    const start = performance.now();
+    const step = (now: number) => {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setCurrent(Math.round(eased * target));
+      if (progress < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }, [target, duration]);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) animate(); },
+      { threshold: 0.3 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [animate]);
+
+  return <span ref={ref}>{prefix}{current.toLocaleString()}{suffix}</span>;
+}
 
 export default function About() {
   const { t, lang } = useLang();
@@ -23,8 +63,8 @@ export default function About() {
       dir={t.dir}
     >
       <div className="max-w-7xl mx-auto px-5 sm:px-8">
-        {/* Left-aligned heading — breaks the centered pattern */}
-        <div className={`max-w-2xl mb-14 reveal ${isAr ? "mr-0 ml-auto text-right" : ""}`}>
+        {/* Left-aligned heading — slides in from the left */}
+        <div className={`max-w-2xl mb-14 ${isAr ? "mr-0 ml-auto text-right reveal-slide-right" : "reveal-slide-left"}`}>
           <span className="inline-block text-primary text-sm font-semibold tracking-widest uppercase mb-3">
             {t.about.badge}
           </span>
@@ -57,8 +97,8 @@ export default function About() {
             </div>
           </div>
 
-          {/* Stats — with visual hierarchy */}
-          <div className="flex-1 reveal">
+          {/* Stats — stagger children on reveal */}
+          <div className="flex-1 stagger-children">
             <dl className="grid grid-cols-2 gap-5">
               {stats.map((stat, i) => (
                 <div
@@ -69,7 +109,7 @@ export default function About() {
                   <dd className={`font-extrabold text-primary order-1 ${isAr ? "" : "font-display"} ${
                     i === 3 ? "text-3xl sm:text-5xl" : "text-3xl sm:text-4xl"
                   }`}>
-                    {stat.value}
+                    <CountUpValue value={stat.value} duration={i === 3 ? 1600 : 1200} />
                   </dd>
                 </div>
               ))}

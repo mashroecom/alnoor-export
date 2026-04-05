@@ -52,9 +52,13 @@ function AppContent() {
       <Header />
       <main>
         <Hero />
+        <div className="section-divider scroll-line-grow max-w-5xl mx-auto" />
         <About />
+        <div className="section-divider scroll-line-grow max-w-5xl mx-auto" />
         <WhyUs />
+        <div className="section-divider scroll-line-grow max-w-5xl mx-auto" />
         <Products />
+        <div className="section-divider scroll-line-grow max-w-5xl mx-auto" />
         <Contact />
       </main>
       <Footer />

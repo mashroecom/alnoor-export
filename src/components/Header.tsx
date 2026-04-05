@@ -114,7 +114,7 @@ export default function Header() {
       </div>
 
       {menuOpen && (
-        <nav id="mobile-menu" className="md:hidden bg-white shadow-lg border-t border-border mt-1" aria-label="Mobile navigation">
+        <nav id="mobile-menu" className="md:hidden bg-white shadow-lg border-t border-border mt-1 animate-slide-down" aria-label="Mobile navigation">
           <div className="flex flex-col p-3 gap-0.5">
             {navItems.map((item) => (
               <a

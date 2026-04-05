@@ -23,8 +23,8 @@ export default function WhyUs() {
       dir={t.dir}
     >
       <div className="max-w-7xl mx-auto px-5 sm:px-8">
-        {/* Right-aligned heading — varies from About's left alignment */}
-        <div className={`max-w-2xl mb-14 reveal ${isAr ? "" : "ml-auto text-right"}`}>
+        {/* Right-aligned heading — slides in from the right */}
+        <div className={`max-w-2xl mb-14 ${isAr ? "reveal-slide-left" : "ml-auto text-right reveal-slide-right"}`}>
           <span className="inline-block text-primary text-sm font-semibold tracking-widest uppercase mb-3">
             {t.why.badge}
           </span>
