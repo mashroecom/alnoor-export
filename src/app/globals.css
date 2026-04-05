@@ -48,7 +48,7 @@ body {
 
 /* Hero */
 .hero-gradient {
-  background: linear-gradient(160deg, var(--color-primary-dark) 0%, var(--color-primary) 40%, #3a7d3b 100%);
+  background: linear-gradient(160deg, #1a4d1b 0%, #2d6a2e 40%, #3a7d3b 100%);
 }
 
 /* Fade in up — expo ease out, no bounce */
