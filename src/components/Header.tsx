@@ -62,7 +62,7 @@ export default function Header() {
               className={`px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 ${
                 scrolled
                   ? "text-text-muted hover:text-primary hover:bg-primary/8"
-                  : "text-white/85 hover:text-white hover:bg-white/10"
+                  : "text-white/90 hover:text-white hover:bg-white/10"
               } ${lang === "ar" ? "font-ar" : ""}`}
             >
               {item.label}

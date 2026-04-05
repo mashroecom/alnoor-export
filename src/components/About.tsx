@@ -63,14 +63,14 @@ export default function About() {
               {stats.map((stat, i) => (
                 <div
                   key={i}
-                  className="bg-surface rounded-2xl p-6 text-center hover:shadow-[0_4px_20px_rgba(26,45,26,0.08)] transition-shadow duration-300"
+                  className="bg-surface rounded-2xl p-6 text-center flex flex-col hover:shadow-[0_4px_20px_rgba(26,45,26,0.08)] transition-shadow duration-300"
                 >
-                  <dd className={`font-extrabold text-primary mb-1 ${isAr ? "" : "font-display"} ${
+                  <dt className="text-sm text-text-subtle font-medium order-2">{stat.label}</dt>
+                  <dd className={`font-extrabold text-primary order-1 ${isAr ? "" : "font-display"} ${
                     i === 3 ? "text-3xl sm:text-5xl" : "text-3xl sm:text-4xl"
                   }`}>
                     {stat.value}
                   </dd>
-                  <dt className="text-sm text-text-subtle font-medium">{stat.label}</dt>
                 </div>
               ))}
             </dl>

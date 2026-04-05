@@ -17,9 +17,9 @@
   --color-border: #d4ddd4;
   --color-surface-alt: #eaf0ea;
   --color-whatsapp: #25d366;
-  --font-display: "Playfair Display", Georgia, serif;
-  --font-sans: "DM Sans", system-ui, sans-serif;
-  --font-ar: "Cairo", system-ui, sans-serif;
+  --font-display: var(--font-playfair), Georgia, serif;
+  --font-sans: var(--font-dm-sans), system-ui, sans-serif;
+  --font-ar: var(--font-cairo), system-ui, sans-serif;
 }
 
 html {

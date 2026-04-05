@@ -51,7 +51,7 @@ export default function Products() {
                 role="tab"
                 aria-selected={activeCategory === cat.key}
                 onClick={() => setActiveCategory(cat.key)}
-                className={`px-5 py-2 rounded-full text-sm font-semibold transition-all duration-200 ${
+                className={`px-5 py-2 min-h-[44px] flex items-center rounded-full text-sm font-semibold transition-all duration-200 ${
                   activeCategory === cat.key
                     ? "bg-primary text-white"
                     : "bg-surface-alt text-text-muted hover:bg-primary/10 hover:text-primary"

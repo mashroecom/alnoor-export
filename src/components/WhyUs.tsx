@@ -10,7 +10,7 @@ export default function WhyUs() {
 
   const items = [
     { num: "01", title: t.why.card1Title, desc: t.why.card1Desc, accent: "border-l-primary" },
-    { num: "02", title: t.why.card2Title, desc: t.why.card2Desc, accent: "border-l-emerald-600" },
+    { num: "02", title: t.why.card2Title, desc: t.why.card2Desc, accent: "border-l-primary-light" },
     { num: "03", title: t.why.card3Title, desc: t.why.card3Desc, accent: "border-l-secondary" },
     { num: "04", title: t.why.card4Title, desc: t.why.card4Desc, accent: "border-l-primary-dark" },
   ];
