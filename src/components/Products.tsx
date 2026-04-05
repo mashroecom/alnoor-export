@@ -27,41 +27,43 @@ export default function Products() {
     <section
       id="products"
       ref={sectionRef}
-      className={`py-24 bg-white ${isAr ? "font-ar" : ""}`}
+      className={`py-20 lg:py-28 bg-white ${isAr ? "font-ar" : ""}`}
       dir={t.dir}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="text-center mb-12 reveal">
-          <span className="inline-block px-5 py-2 bg-primary/8 text-primary rounded-full text-sm font-semibold mb-4">
-            {t.products.badge}
-          </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-text tracking-tight">
-            {t.products.title}{" "}
-            <span className="text-primary">{t.products.titleHighlight}</span>
-          </h2>
-          <p className="mt-4 text-lg text-text-muted max-w-2xl mx-auto leading-relaxed">
-            {t.products.description}
-          </p>
+      <div className="max-w-7xl mx-auto px-5 sm:px-8">
+        {/* Header row: title left, filters right */}
+        <div className={`flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-12 reveal ${isAr ? "sm:flex-row-reverse" : ""}`}>
+          <div className={`max-w-xl ${isAr ? "text-right" : ""}`}>
+            <span className="inline-block text-primary text-sm font-semibold tracking-widest uppercase mb-3">
+              {t.products.badge}
+            </span>
+            <h2 className={`text-3xl sm:text-4xl lg:text-5xl font-extrabold text-text leading-tight ${isAr ? "" : "font-display"}`}>
+              {t.products.title}{" "}
+              <span className="text-primary">{t.products.titleHighlight}</span>
+            </h2>
+            <p className="mt-3 text-text-muted leading-relaxed">{t.products.description}</p>
+          </div>
+
+          <div className="flex flex-wrap gap-2 shrink-0" role="tablist" aria-label="Product categories">
+            {categories.map((cat) => (
+              <button
+                key={cat.key}
+                role="tab"
+                aria-selected={activeCategory === cat.key}
+                onClick={() => setActiveCategory(cat.key)}
+                className={`px-5 py-2 rounded-full text-sm font-semibold transition-all duration-200 ${
+                  activeCategory === cat.key
+                    ? "bg-primary text-white"
+                    : "bg-surface-alt text-text-muted hover:bg-primary/10 hover:text-primary"
+                }`}
+              >
+                {cat.label}
+              </button>
+            ))}
+          </div>
         </div>
 
-        <div className="flex flex-wrap justify-center gap-3 mb-12 reveal" role="tablist" aria-label="Product categories">
-          {categories.map((cat) => (
-            <button
-              key={cat.key}
-              role="tab"
-              aria-selected={activeCategory === cat.key}
-              onClick={() => setActiveCategory(cat.key)}
-              className={`px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-200 ${
-                activeCategory === cat.key
-                  ? "bg-primary text-white shadow-md shadow-primary/20"
-                  : "bg-surface-alt text-text-muted hover:bg-primary/10 hover:text-primary"
-              }`}
-            >
-              {cat.label}
-            </button>
-          ))}
-        </div>
-
+        {/* Grid */}
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-5" role="tabpanel">
           {filtered.map((product) => (
             <div
