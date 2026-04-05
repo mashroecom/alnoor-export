@@ -24,6 +24,10 @@ const cairo = Cairo({
 });
 
 export const metadata: Metadata = {
+  icons: {
+    icon: "/logo.jpg",
+    apple: "/logo.jpg",
+  },
   title: "Al Noor Export & Food Industries | Frozen Fruits & Vegetables from Egypt",
   description:
     "Al Noor Export & Food Industries - Leading Egyptian company in the production and export of frozen fruits, vegetables, and preserved products. Premium quality from Egypt to the world.",

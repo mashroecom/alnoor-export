@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useLang } from "@/lib/LanguageContext";
 
 export default function Footer() {
@@ -21,7 +22,7 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <div className="flex items-center gap-3 mb-5">
-              <img src="/logo.jpg" alt="Al Noor" className="h-12 w-auto" />
+              <Image src="/logo.jpg" alt="Al Noor" width={48} height={48} className="h-12 w-auto" />
               <div>
                 <div className="font-bold text-white tracking-wide">
                   {isAr ? "النور للتصدير" : "AL NOOR"}

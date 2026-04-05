@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useLang } from "@/lib/LanguageContext";
 
 export default function Hero() {
@@ -38,45 +39,37 @@ export default function Hero() {
               className={`flex flex-wrap gap-4 animate-fade-in-up ${isAr ? "justify-end" : ""}`}
               style={{ animationDelay: "0.36s" }}
             >
-              <a
-                href="#products"
-                className="px-8 py-4 bg-secondary hover:bg-secondary-light text-white font-bold rounded-full transition-all duration-200 hover:shadow-[0_8px_24px_rgba(212,148,14,0.3)] text-lg"
-              >
+              <a href="#products" className="px-8 py-4 bg-secondary hover:bg-secondary-light text-white font-bold rounded-full transition-all duration-200 hover:shadow-[0_8px_24px_rgba(212,148,14,0.3)] text-lg">
                 {t.hero.cta}
               </a>
-              <a
-                href="#contact"
-                className="px-8 py-4 border-2 border-white/40 text-white hover:bg-white/10 font-bold rounded-full transition-all duration-200 text-lg"
-              >
+              <a href="#contact" className="px-8 py-4 border-2 border-white/40 text-white hover:bg-white/10 font-bold rounded-full transition-all duration-200 text-lg">
                 {t.hero.contactBtn}
               </a>
             </div>
           </div>
 
-          {/* Product images mosaic */}
           <div className="flex-shrink-0 w-full max-w-sm lg:max-w-md animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
             <div className="grid grid-cols-2 gap-3">
               <div className="space-y-3">
-                <div className="rounded-2xl overflow-hidden aspect-square shadow-[0_8px_30px_rgba(26,45,26,0.3)]">
-                  <img src="/products/Artichokes-Fresh-1.jpg" alt="Fresh Egyptian artichokes" className="w-full h-full object-cover" loading="eager" />
+                <div className="rounded-2xl overflow-hidden aspect-square shadow-[0_8px_30px_rgba(26,45,26,0.3)] relative">
+                  <Image src="/products/Artichokes-Fresh-1.jpg" alt="Fresh Egyptian artichokes" fill className="object-cover" priority sizes="(max-width: 768px) 45vw, 200px" />
                 </div>
-                <div className="rounded-2xl overflow-hidden aspect-[4/3] shadow-[0_8px_30px_rgba(26,45,26,0.3)]">
-                  <img src="/products/Strawberries.jpg" alt="Frozen strawberries" className="w-full h-full object-cover" loading="lazy" />
+                <div className="rounded-2xl overflow-hidden aspect-[4/3] shadow-[0_8px_30px_rgba(26,45,26,0.3)] relative">
+                  <Image src="/products/Strawberries.jpg" alt="Frozen strawberries" fill className="object-cover" sizes="(max-width: 768px) 45vw, 200px" />
                 </div>
               </div>
               <div className="space-y-3 pt-8">
-                <div className="rounded-2xl overflow-hidden aspect-[4/3] shadow-[0_8px_30px_rgba(26,45,26,0.3)]">
-                  <img src="/products/Broccoli.jpg" alt="Frozen broccoli" className="w-full h-full object-cover" loading="lazy" />
+                <div className="rounded-2xl overflow-hidden aspect-[4/3] shadow-[0_8px_30px_rgba(26,45,26,0.3)] relative">
+                  <Image src="/products/Broccoli.jpg" alt="Frozen broccoli" fill className="object-cover" sizes="(max-width: 768px) 45vw, 200px" />
                 </div>
-                <div className="rounded-2xl overflow-hidden aspect-square shadow-[0_8px_30px_rgba(26,45,26,0.3)]">
-                  <img src="/products/Mango.jpg" alt="Frozen mango slices" className="w-full h-full object-cover" loading="lazy" />
+                <div className="rounded-2xl overflow-hidden aspect-square shadow-[0_8px_30px_rgba(26,45,26,0.3)] relative">
+                  <Image src="/products/Mango.jpg" alt="Frozen mango slices" fill className="object-cover" sizes="(max-width: 768px) 45vw, 200px" />
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Scroll indicator */}
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden sm:block">
           <a href="#about" className="text-white/50 hover:text-white/80 transition-colors" aria-label="Scroll to About section">
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
