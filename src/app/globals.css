@@ -4,74 +4,87 @@
   --color-primary: #2d6a2e;
   --color-primary-light: #4a9e4c;
   --color-primary-dark: #1a4d1b;
-  --color-secondary: #d4940e;
-  --color-secondary-light: #e8b84a;
+  --color-secondary: #f4a623;
+  --color-secondary-light: #f7c25e;
   --color-accent: #1a73e8;
-  --color-surface: #f5f7f3;
-  --color-surface-dark: #111f11;
+  --color-surface: #f7f9f7;
+  --color-surface-dark: #162016;
   --color-text: #1a2e1a;
-  --color-text-muted: #3d5e3d;
-  --color-text-subtle: #5a7a5a;
-  --color-text-on-dark: #b8d4b8;
-  --color-text-on-dark-subtle: #7aa47a;
-  --color-border: #d4ddd4;
-  --color-surface-alt: #eaf0ea;
+  --color-text-muted: #4a6a4a;
+  --color-text-subtle: #6a8a6a;
+  --color-text-on-dark: #a0c8a0;
+  --color-text-on-dark-subtle: #80a880;
+  --color-border: #dce5dc;
+  --color-surface-alt: #eef3ee;
   --color-whatsapp: #25d366;
-  --font-display: "DM Serif Display", Georgia, serif;
-  --font-sans: "DM Sans", system-ui, sans-serif;
-  --font-ar: "Cairo", system-ui, sans-serif;
+  --font-sans: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  --font-ar: "Cairo", "Segoe UI", Tahoma, sans-serif;
 }
 
 html {
   scroll-behavior: smooth;
-  -webkit-font-smoothing: antialiased;
 }
 
 body {
   overflow-x: hidden;
   color: var(--color-text);
-  font-family: var(--font-sans);
-}
-
-.font-display {
-  font-family: var(--font-display);
 }
 
 .font-ar {
   font-family: var(--font-ar);
 }
 
-/* Global focus */
+/* Global focus styles */
 :focus-visible {
   outline: 2px solid var(--color-primary);
   outline-offset: 2px;
 }
 
-/* Hero gradient */
+/* Animated gradient background */
 .hero-gradient {
-  background: linear-gradient(160deg, var(--color-primary-dark) 0%, var(--color-primary) 40%, #3a7d3b 100%);
+  background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary) 30%, var(--color-primary-light) 60%, var(--color-primary) 100%);
+  background-size: 200% 200%;
+  animation: gradientShift 8s ease infinite;
 }
 
-/* Subtle shine overlay */
-.hero-shine {
-  background: radial-gradient(ellipse 80% 60% at 20% 50%, rgba(255,255,255,0.06) 0%, transparent 60%);
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* Floating animation */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-float-delay {
+  animation: float 3s ease-in-out 1s infinite;
+}
+
+.animate-float-delay-2 {
+  animation: float 3s ease-in-out 2s infinite;
 }
 
 /* Fade in up */
 @keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(28px); }
+  from { opacity: 0; transform: translateY(24px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
 .animate-fade-in-up {
-  animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 /* Scroll reveal */
 .reveal {
   opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateY(24px);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .reveal.visible {
@@ -79,14 +92,14 @@ body {
   transform: translateY(0);
 }
 
-/* Product card */
+/* Product card hover */
 .product-card {
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .product-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 16px 40px rgba(26, 45, 26, 0.14);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(45, 106, 46, 0.12);
 }
 
 /* WhatsApp pulse */
@@ -97,7 +110,13 @@ body {
 }
 
 .whatsapp-pulse {
-  animation: pulse-green 2.5s infinite;
+  animation: pulse-green 2s infinite;
+}
+
+/* Decorative pattern */
+.pattern-dots {
+  background-image: radial-gradient(circle, rgba(45, 106, 46, 0.08) 1px, transparent 1px);
+  background-size: 24px 24px;
 }
 
 /* Reduced motion */
@@ -108,10 +127,18 @@ body {
     transition-duration: 0.01ms !important;
   }
 
-  html { scroll-behavior: auto; }
+  html {
+    scroll-behavior: auto;
+  }
 
   .reveal {
     opacity: 1;
     transform: none;
+  }
+
+  .animate-float,
+  .animate-float-delay,
+  .animate-float-delay-2 {
+    animation: none;
   }
 }

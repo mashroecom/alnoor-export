@@ -18,7 +18,9 @@ export default function Header() {
 
   useEffect(() => {
     if (!menuOpen) return;
-    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") closeMenu(); };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") closeMenu();
+    };
     document.addEventListener("keydown", onKey);
     return () => document.removeEventListener("keydown", onKey);
   }, [menuOpen, closeMenu]);
@@ -35,32 +37,32 @@ export default function Header() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-white/97 shadow-[0_1px_2px_rgba(26,45,26,0.06)] py-3"
-          : "bg-transparent py-5"
+          ? "bg-white/97 shadow-[0_1px_3px_rgba(26,45,26,0.08)] py-2"
+          : "bg-transparent py-4"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-5 sm:px-8 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between">
         <a href="#home" className="flex items-center gap-3 shrink-0 rounded-lg">
-          <img src="/logo.png" alt="Al Noor Export" className="h-10 sm:h-12 w-auto" />
+          <img src="/logo.png" alt="Al Noor Export" className="h-12 sm:h-14 w-auto" />
           <div className={`hidden sm:block transition-colors duration-300 ${scrolled ? "text-primary-dark" : "text-white"}`}>
-            <div className={`font-bold text-sm leading-tight ${lang === "ar" ? "font-ar" : "tracking-wide"}`}>
+            <div className={`font-bold text-sm leading-tight tracking-wide ${lang === "ar" ? "font-ar" : ""}`}>
               {lang === "ar" ? "النور للتصدير" : "AL NOOR"}
             </div>
-            <div className={`text-xs opacity-60 ${lang === "ar" ? "font-ar" : ""}`}>
-              {lang === "ar" ? "والصناعات الغذائية" : "EXPORT & FOOD"}
+            <div className={`text-xs opacity-75 ${lang === "ar" ? "font-ar" : ""}`}>
+              {lang === "ar" ? "والصناعات الغذائية" : "EXPORT & FOOD INDUSTRIES"}
             </div>
           </div>
         </a>
 
-        <nav className="hidden md:flex items-center gap-1" aria-label="Main navigation">
+        <nav className="hidden md:flex items-center gap-0.5" aria-label="Main navigation">
           {navItems.map((item) => (
             <a
               key={item.href}
               href={item.href}
-              className={`px-3.5 py-1.5 rounded-md text-sm font-medium transition-colors duration-200 ${
+              className={`px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 ${
                 scrolled
-                  ? "text-text-muted hover:text-primary"
-                  : "text-white/75 hover:text-white"
+                  ? "text-text-muted hover:text-primary hover:bg-primary/8"
+                  : "text-white/85 hover:text-white hover:bg-white/10"
               } ${lang === "ar" ? "font-ar" : ""}`}
             >
               {item.label}
@@ -68,10 +70,10 @@ export default function Header() {
           ))}
           <button
             onClick={toggleLang}
-            className={`ms-2 px-3.5 py-1.5 rounded-md text-sm font-bold border transition-colors duration-200 ${
+            className={`ms-3 px-4 py-2 rounded-full text-sm font-bold border-2 transition-colors duration-200 ${
               scrolled
-                ? "border-border text-text hover:border-primary hover:text-primary"
-                : "border-white/30 text-white/90 hover:bg-white/10"
+                ? "border-primary text-primary hover:bg-primary hover:text-white"
+                : "border-white/60 text-white hover:bg-white hover:text-primary-dark"
             } ${lang === "en" ? "font-ar" : ""}`}
           >
             {t.nav.langSwitch}
@@ -81,13 +83,13 @@ export default function Header() {
         <button
           onClick={() => setMenuOpen(!menuOpen)}
           className={`md:hidden p-3 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg transition-colors ${
-            scrolled ? "text-text" : "text-white"
+            scrolled ? "text-text-muted" : "text-white"
           }`}
           aria-label="Toggle menu"
           aria-expanded={menuOpen}
           aria-controls="mobile-menu"
         >
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             {menuOpen ? (
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             ) : (
@@ -98,14 +100,14 @@ export default function Header() {
       </div>
 
       {menuOpen && (
-        <nav id="mobile-menu" className="md:hidden bg-white shadow-lg border-t border-border mt-1" aria-label="Mobile navigation">
-          <div className="flex flex-col p-3 gap-0.5">
+        <nav id="mobile-menu" className="md:hidden bg-white shadow-xl border-t border-border mt-2" aria-label="Mobile navigation">
+          <div className="flex flex-col p-4 gap-1">
             {navItems.map((item) => (
               <a
                 key={item.href}
                 href={item.href}
                 onClick={closeMenu}
-                className={`px-4 py-3 rounded-lg text-text hover:bg-surface font-medium transition-colors text-sm ${
+                className={`px-4 py-3 rounded-lg text-text-muted hover:bg-primary/5 hover:text-primary font-medium transition-colors ${
                   lang === "ar" ? "font-ar text-right" : ""
                 }`}
               >
@@ -114,7 +116,7 @@ export default function Header() {
             ))}
             <button
               onClick={() => { toggleLang(); closeMenu(); }}
-              className={`mt-1 px-4 py-3 rounded-lg border border-border text-text font-bold hover:bg-surface transition-colors text-sm ${
+              className={`mt-2 px-4 py-3 rounded-lg border-2 border-primary text-primary font-bold hover:bg-primary hover:text-white transition-colors ${
                 lang === "en" ? "font-ar" : ""
               }`}
             >
