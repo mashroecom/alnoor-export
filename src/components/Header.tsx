@@ -43,7 +43,7 @@ export default function Header() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between">
         <a href="#home" className="flex items-center gap-3 shrink-0 rounded-lg">
-          <img src="/logo.png" alt="Al Noor Export" className="h-12 sm:h-14 w-auto" />
+          <img src="/logo.jpg" alt="Al Noor Export" className="h-12 sm:h-14 w-auto" />
           <div className={`hidden sm:block transition-colors duration-300 ${scrolled ? "text-primary-dark" : "text-white"}`}>
             <div className={`font-bold text-sm leading-tight tracking-wide ${lang === "ar" ? "font-ar" : ""}`}>
               {lang === "ar" ? "النور للتصدير" : "AL NOOR"}

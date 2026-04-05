@@ -21,7 +21,7 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <div className="flex items-center gap-3 mb-5">
-              <img src="/logo.png" alt="Al Noor" className="h-12 w-auto" />
+              <img src="/logo.jpg" alt="Al Noor" className="h-12 w-auto" />
               <div>
                 <div className="font-bold text-white tracking-wide">
                   {isAr ? "النور للتصدير" : "AL NOOR"}
