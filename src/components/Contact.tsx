@@ -41,6 +41,8 @@ export default function Contact() {
                 <div className="text-xs text-text-subtle font-medium uppercase tracking-wider mb-1">{t.contact.phone}</div>
                 <a href="tel:+201005702908" className="block font-semibold text-text hover:text-primary transition-colors" dir="ltr">+20 100 570 2908</a>
                 <a href="tel:+201000891236" className="block font-semibold text-text hover:text-primary transition-colors" dir="ltr">+20 100 089 1236</a>
+                <a href="tel:+201080114075" className="block font-semibold text-text hover:text-primary transition-colors" dir="ltr">+20 108 011 4075</a>
+                <a href="tel:+201030210408" className="block font-semibold text-text hover:text-primary transition-colors" dir="ltr">+20 103 021 0408</a>
               </div>
             </div>
 
@@ -83,6 +85,23 @@ export default function Contact() {
               <div>
                 <div className="font-semibold text-green-800 group-hover:text-green-900">{t.contact.whatsapp}</div>
                 <div className="text-sm text-green-700" dir="ltr">+20 100 570 2908</div>
+              </div>
+            </a>
+
+            <a
+              href="https://www.facebook.com/profile.php?id=61583558192980"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="reveal flex items-center gap-4 bg-white hover:bg-blue-50 rounded-xl p-5 border border-border transition-colors duration-200 group"
+            >
+              <div className="w-10 h-10 bg-[#1877F2] rounded-lg flex items-center justify-center shrink-0">
+                <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                </svg>
+              </div>
+              <div>
+                <div className="font-semibold text-blue-800 group-hover:text-blue-900">Facebook</div>
+                <div className="text-sm text-blue-700">{isAr ? "تابعنا على فيسبوك" : "Follow us on Facebook"}</div>
               </div>
             </a>
           </div>
