@@ -39,10 +39,8 @@ export default function Contact() {
               </div>
               <div>
                 <div className="text-xs text-text-subtle font-medium uppercase tracking-wider mb-1">{t.contact.phone}</div>
-                <a href="tel:+201005702908" className="block font-semibold text-text hover:text-primary transition-colors" dir="ltr">+20 100 570 2908</a>
-                <a href="tel:+201000891236" className="block font-semibold text-text hover:text-primary transition-colors" dir="ltr">+20 100 089 1236</a>
-                <a href="tel:+201080114075" className="block font-semibold text-text hover:text-primary transition-colors" dir="ltr">+20 108 011 4075</a>
                 <a href="tel:+201030210408" className="block font-semibold text-text hover:text-primary transition-colors" dir="ltr">+20 103 021 0408</a>
+                <a href="tel:+201080114075" className="block font-semibold text-text hover:text-primary transition-colors" dir="ltr">+20 108 011 4075</a>
               </div>
             </div>
 
@@ -72,7 +70,7 @@ export default function Contact() {
             </div>
 
             <a
-              href="https://wa.me/201005702908"
+              href="https://wa.me/201030210408"
               target="_blank"
               rel="noopener noreferrer"
               className="reveal flex items-center gap-4 bg-white hover:bg-green-50 rounded-xl p-5 border border-border transition-colors duration-200 group whatsapp-pulse"
@@ -84,7 +82,7 @@ export default function Contact() {
               </div>
               <div>
                 <div className="font-semibold text-green-800 group-hover:text-green-900">{t.contact.whatsapp}</div>
-                <div className="text-sm text-green-700" dir="ltr">+20 100 570 2908</div>
+                <div className="text-sm text-green-700" dir="ltr">+20 103 021 0408</div>
               </div>
             </a>
 
