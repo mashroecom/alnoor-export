@@ -154,26 +154,8 @@ export default function Products() {
                   ? isAr ? "منتج محفوظ" : "Preserved Product"
                   : isAr ? "خضار مجمد" : "Frozen Vegetable"}
               </span>
-              <div className="mt-4 space-y-2 text-text-muted text-sm">
-                <div className="flex justify-between border-b border-border pb-2">
-                  <span className="font-medium">{isAr ? "التعبئة" : "Packaging"}</span>
-                  <span>{isAr ? "10 كجم / كرتون" : "10 kg / carton"}</span>
-                </div>
-                <div className="flex justify-between border-b border-border pb-2">
-                  <span className="font-medium">{isAr ? "درجة الحرارة" : "Storage"}</span>
-                  <span>-18°C</span>
-                </div>
-                <div className="flex justify-between border-b border-border pb-2">
-                  <span className="font-medium">{isAr ? "المنشأ" : "Origin"}</span>
-                  <span>{isAr ? "مصر" : "Egypt"}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="font-medium">{isAr ? "الصلاحية" : "Shelf Life"}</span>
-                  <span>{isAr ? "24 شهر" : "24 months"}</span>
-                </div>
-              </div>
               <a
-                href="https://wa.me/201005702908"
+                href="https://wa.me/201030210408"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-6 w-full flex items-center justify-center gap-2 px-6 py-3 bg-whatsapp hover:brightness-110 text-white font-bold rounded-full transition-all text-sm"
