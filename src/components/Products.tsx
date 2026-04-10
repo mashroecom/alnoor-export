@@ -152,31 +152,29 @@ export default function Products() {
                   ? isAr ? "فاكهة مجمدة" : "Frozen Fruit"
                   : selectedProduct.category === "preserved"
                   ? isAr ? "منتج محفوظ" : "Preserved Product"
+                  : (selectedProduct.id === 1 || selectedProduct.id === 26)
+                  ? isAr ? "خضار فريش" : "Fresh Vegetable"
                   : isAr ? "خضار مجمد" : "Frozen Vegetable"}
               </span>
               {(() => {
                 const isFresh = selectedProduct.id === 1 || selectedProduct.id === 26;
                 const isRoomTemp = selectedProduct.category === "preserved" || isFresh;
                 const isPreserved = selectedProduct.category === "preserved";
+                const isPumpkin = selectedProduct.id === 26;
+                const isArtichokesFresh = selectedProduct.id === 1;
                 return (
                   <div className="mt-4 space-y-2 text-text-muted text-sm">
-                    {!isFresh && (
-                      <div className="flex justify-between border-b border-border pb-2">
-                        <span className="font-medium">{isAr ? "التعبئة" : "Packaging"}</span>
-                        <span>{isPreserved ? (isAr ? "160 كجم / برميل" : "160 kg / barrel") : (isAr ? "10 كجم / كرتون" : "10 kg / carton")}</span>
-                      </div>
-                    )}
+                    <div className="flex justify-between border-b border-border pb-2">
+                      <span className="font-medium">{isAr ? "التعبئة" : "Packaging"}</span>
+                      <span>{isPumpkin ? (isAr ? "حسب الطلب" : "As requested") : isArtichokesFresh ? (isAr ? "30 قطعة" : "30 pieces") : isPreserved ? (isAr ? "160 كجم / برميل" : "160 kg / barrel") : (isAr ? "10 كجم / كرتون" : "10 kg / carton")}</span>
+                    </div>
                     <div className="flex justify-between border-b border-border pb-2">
                       <span className="font-medium">{isAr ? "درجة الحرارة" : "Storage"}</span>
                       <span>{isRoomTemp ? (isAr ? "درجة حرارة الغرفة" : "Room Temperature") : "-18°C"}</span>
                     </div>
-                    <div className="flex justify-between border-b border-border pb-2">
+                    <div className="flex justify-between">
                       <span className="font-medium">{isAr ? "المنشأ" : "Origin"}</span>
                       <span>{isAr ? "مصر" : "Egypt"}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="font-medium">{isAr ? "الصلاحية" : "Shelf Life"}</span>
-                      <span>{isAr ? "24 شهر" : "24 months"}</span>
                     </div>
                   </div>
                 );
