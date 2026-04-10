@@ -16,10 +16,9 @@ export default function ContactForm() {
     const email = data.get("email") as string;
     const message = data.get("message") as string;
 
-    const whatsappText = encodeURIComponent(
-      `Name: ${name}\nEmail: ${email}\nMessage: ${message}`
-    );
-    window.open(`https://wa.me/201005702908?text=${whatsappText}`, "_blank");
+    const subject = encodeURIComponent(`Message from ${name}`);
+    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
+    window.location.href = `mailto:info@alnoor-export.com?subject=${subject}&body=${body}`;
     setSent(true);
     form.reset();
     setTimeout(() => setSent(false), 3000);
