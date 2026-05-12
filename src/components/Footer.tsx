@@ -33,6 +33,16 @@ export default function Footer() {
               </div>
             </div>
             <p className="text-text-on-dark leading-relaxed text-sm">{t.footer.description}</p>
+            <div className="mt-5 pt-5 border-t border-white/10 space-y-1.5 text-xs text-text-on-dark-subtle">
+              <div className="flex gap-2">
+                <span className="font-semibold text-text-on-dark">{isAr ? "السجل التجاري:" : "Commercial Reg.:"}</span>
+                <span dir="ltr">1021003000039324</span>
+              </div>
+              <div className="flex gap-2">
+                <span className="font-semibold text-text-on-dark">{isAr ? "البطاقة الضريبية:" : "Tax ID:"}</span>
+                <span dir="ltr">780-428-536</span>
+              </div>
+            </div>
           </div>
 
           {/* Quick Links */}
