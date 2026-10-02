@@ -80,7 +80,15 @@ export default function Footer() {
 
       <div className="border-t border-white/10">
         <div className="max-w-7xl mx-auto px-5 sm:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-text-on-dark-subtle">
-          <span>&copy; {new Date().getFullYear()} {t.footer.company}. {t.footer.rights}</span>
+          <div className="flex flex-col items-center sm:items-start gap-1">
+            <span>&copy; {new Date().getFullYear()} {t.footer.company}. {t.footer.rights}</span>
+            <span>
+              {isAr ? "تم تطوير الموقع بواسطة " : "Developed by "}
+              <a href="https://codeksoft.com/" target="_blank" rel="noopener noreferrer" className="font-semibold text-text-on-dark hover:text-white transition-colors">
+                Codeksoft
+              </a>
+            </span>
+          </div>
           <div className="flex items-center gap-1">
             <a href="https://wa.me/201030210408" target="_blank" rel="noopener noreferrer" className="p-2.5 min-w-[44px] min-h-[44px] flex items-center justify-center hover:text-whatsapp transition-colors rounded-lg" aria-label="WhatsApp">
               <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
